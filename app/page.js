@@ -1,65 +1,188 @@
-import Image from "next/image";
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import dynamic from "next/dynamic";
+// import OpenWhen from "./components/OpenWhen";
+// import MemorySlider from "./components/MemorySlider";
+// import Proposal from "./components/Proposal";
+// import LoveMeter from "./components/LoveMeter";
+// import confetti from "canvas-confetti";
+// import { motion } from "framer-motion";
+
+// // ⛔ Disable SSR for countdown (avoid hydration mismatch)
+// const Countdown = dynamic(() => import("./components/Countdown"), {
+//   ssr: false,
+// });
+
+// const MusicPlayer = dynamic(() => import("./components/MusicPlayer"), {
+//   ssr: false,
+// });
+
+// export default function Home() {
+//   const [unlocked, setUnlocked] = useState(false);
+
+//   useEffect(() => {
+//     // const unlockDate = new Date();
+//     // unlockDate.setHours(3);
+//     // unlockDate.setMinutes(10);
+//     // unlockDate.setSeconds(0);
+//     const unlockDate = new Date(Date.UTC(2026, 2, 22, 18, 30, 0));
+//     console.log(
+//       unlockDate.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+//     );
+
+//     const interval = setInterval(() => {
+//       if (new Date() >= unlockDate) {
+//         setUnlocked(true);
+//         clearInterval(interval);
+//       }
+//     }, 1000);
+
+//     return () => clearInterval(interval);
+//   }, []);
+
+//   return (
+//     <main className="min-h-screen bg-gradient-to-br from-pink-400 via-purple-400 to-indigo-500 text-white flex flex-col items-center text-center p-6">
+//       {/* Heading */}
+//       <motion.h1
+//         initial={{ opacity: 0, y: -30 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.8 }}
+//         className="text-4xl md:text-5xl font-bold mt-10"
+//       >
+//         {unlocked
+//           ? "Happy Birthday My Love ❤️"
+//           : "Something Magical is Coming..."}
+//       </motion.h1>
+
+//       {/* Countdown Before Unlock */}
+//       {!unlocked && <Countdown />}
+
+//       {/* Music Button */}
+//       <MusicPlayer />
+
+//       {/* Premium Sections After Unlock */}
+//       {unlocked && (
+//         <motion.div
+//           initial={{ opacity: 0 }}
+//           animate={{ opacity: 1 }}
+//           transition={{ duration: 1 }}
+//           className="w-full flex flex-col items-center"
+//         >
+//           <MemorySlider />
+//           <OpenWhen />
+//           <LoveMeter />
+//           <Proposal />
+//         </motion.div>
+//       )}
+
+//       {/* Hidden Dev Easter Egg */}
+//       <div className="mt-12 opacity-60 text-xs">
+//         {/* If you're reading this in inspect... yes, forever starts with you ❤️ */}
+//       </div>
+//     </main>
+//   );
+// }
+
+"use client";
+
+import { useEffect, useState } from "react";
+
+import PasswordGate from "./components/PasswordGate";
+import SplashScreen from "./components/SplashScreen";
+import MusicPlayer from "./components/MusicPlayer";
+import Fireworks from "./components/Fireworks";
+import Typewriter from "./components/Typewriter";
+import FloatingHearts from "./components/FloatingHearts";
+import Countdown from "./components/Countdown";
+import GalaxyBackground from "./components/GalaxyBackground";
+import MemorySlider from "./components/MemorySlider";
+import MemoryGallery from "./components/MemoryGallery";
+import LoveMeter from "./components/LoveMeter";
+import Proposal from "./components/Proposal";
+import ProposalRing from "./components/ProposalRing";
+import Quiz from "./components/Quiz";
+import OpenWhen from "./components/OpenWhen";
+import MemoryCarousel from "./components/MemoryCarousel";
 
 export default function Home() {
+  const [authorized, setAuthorized] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+  const [level, setLevel] = useState(100);
+
+  useEffect(() => {
+    const unlockDate = new Date(Date.UTC(2026, 2, 22, 18, 30, 0));
+    // const unlockDate = new Date();
+    //     unlockDate.setHours(0);
+    //     unlockDate.setMinutes(0);
+    //     unlockDate.setSeconds(0);
+    const lockDate = new Date(unlockDate.getTime() - 0 * 60 * 1000);
+    console.log(unlockDate);
+    console.log(lockDate);
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      // console.log(now)
+
+      if (now >= lockDate && now < unlockDate) {
+        setAuthorized(false);
+      }
+
+      if (now >= unlockDate) {
+        setUnlocked(true);
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // 🔐 PASSWORD
+  if (!authorized)
+    return <PasswordGate onSuccess={() => setAuthorized(true)} />;
+
+  // 🌟 SPLASH
+  if (showSplash) return <SplashScreen onFinish={() => setShowSplash(false)} />;
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="relative min-h-screen overflow-hidden">
+      {/* 🌌 Background */}
+      {!unlocked && <GalaxyBackground />}
+      <FloatingHearts level={level} />
+      <MusicPlayer unlocked={unlocked} />
+
+      {/* 🔒 BEFORE UNLOCK */}
+      {!unlocked && (
+        <div className="flex flex-col items-center justify-center h-screen text-white text-center space-y-6">
+          <p className="text-4xl md:text-5xl font-bold">
+            Something magical is coming...
           </p>
+          <Countdown />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      )}
+
+      {/* 💖 AFTER UNLOCK */}
+      {unlocked && (
+        <div className="bg-gradient-to-br from-pink-300 to-yellow-200 min-h-screen text-center space-y-20 pb-20">
+          <Fireworks />
+          <Typewriter />
+
+          <MemorySlider />
+          {/* <MemoryGallery /> */}
+          {/* <MemoryCarousel /> */}
+
+          <FloatingHearts level={level} />
+          <LoveMeter onLevelChange={setLevel} />
+
+          <Proposal />
+          <ProposalRing />
+
+          <Quiz />
+
+          <OpenWhen />
         </div>
-      </main>
-    </div>
+      )}
+    </main>
   );
 }
