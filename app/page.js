@@ -154,7 +154,7 @@ export default function Home() {
 
       {/* 🔒 BEFORE UNLOCK */}
       {!unlocked && (
-        <div className="flex flex-col items-center justify-center h-screen text-white text-center space-y-6">
+        <div className="flex flex-col items-center justify-start pt-20 h-screen text-white text-center space-y-6">
           <p className="text-4xl md:text-5xl font-bold">
             Something magical is coming...
           </p>
