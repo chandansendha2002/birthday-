@@ -110,16 +110,48 @@ export default function Home() {
   const [unlocked, setUnlocked] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const [level, setLevel] = useState(100);
+  const images1 = [
+    "/memories/mem3.jpg",
+    "/memories/mem5.jpg",
+    "/memories/mem6.jpg",
+    "/memories/mem8.jpg",
+    "/memories/mem11.jpg",
+    "/memories/mem13.jpg",
+    "/memories/mem15.jpg",
+    "/memories/mem21.jpg",
+  ];
+  const images2 = [
+    "/memories/mem2.jpg",
+    "/memories/mem4.jpg",
+    "/memories/mem9.jpg",
+    "/memories/mem10.jpg",
+    "/memories/mem14.jpg",
+    "/memories/mem19.jpg",
+    "/memories/mem16.jpg",
+    "/memories/mem20.jpg",
+  ];
+  const images3 = [
+    "/memories/mem12.jpg",
+    "/memories/mem17.jpg",
+    "/memories/mem22.jpg",
+    "/memories/mem23.jpg",
+    "/memories/mem7.jpg",
+    "/memories/mem1.jpg",
+    "/memories/mem24.jpg",
+    "/memories/mem18.jpg",
+  ];
 
   useEffect(() => {
     const unlockDate = new Date(Date.UTC(2026, 2, 22, 18, 30, 0));
+    // const unlockDate = new Date(Date.UTC(2026, 2, 22, 9, 30, 0));
     // const unlockDate = new Date();
     //     unlockDate.setHours(0);
     //     unlockDate.setMinutes(0);
     //     unlockDate.setSeconds(0);
-    const lockDate = new Date(unlockDate.getTime() - 0 * 60 * 1000);
+    const lockDate = new Date(unlockDate.getTime() - 2 * 60 * 1000);
     console.log(unlockDate);
     console.log(lockDate);
+
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -170,7 +202,21 @@ export default function Home() {
 
           <MemorySlider />
           {/* <MemoryGallery /> */}
-          {/* <MemoryCarousel /> */}
+          <MemoryCarousel
+            images={images1}
+            title={"Where Our Story Began 💖"}
+            sub={"Every memory in Delhi… is a piece of my heart"}
+          />
+          <MemoryCarousel
+            images={images2}
+            title={"Moments That Made Us Stronger ❤️"}
+            sub={"From Hyderabad… to forever together"}
+          />
+          <MemoryCarousel
+            images={images3}
+            title={"Every Moment With You Is My Favorite 🎂💖"}
+            sub={"On your special day… I just want to say I love you"}
+          />
 
           <FloatingHearts level={level} />
           <LoveMeter onLevelChange={setLevel} />

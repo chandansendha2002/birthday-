@@ -12,31 +12,31 @@ export default function Quiz() {
       question: "Where did we first start talking properly?",
       options: [
         "Instagram DM",
-        "College corridor",
+        "Air Port",
         "That random late night chat",
         "Bus stop",
       ],
-      answer: 1,
+      answer: 0,
     },
     {
       question: "What is the thing I always say about you?",
       options: [
-        "You are annoying",
         "You are cute but dangerous",
         "You are my peace",
+        "You are annoying",
         "You talk too much",
       ],
       answer: 2,
     },
     {
       question: "What is the one thing I secretly love about you?",
-      options: ["Your smile", "Your voice", "The way you care", "All of them"],
-      answer: 3,
+      options: ["Your smile", "The way you care", "Your voice", "All of them"],
+      answer: 1,
     },
     {
-      question: "What do I wish for you every day?",
+      question: "What do I wish for you every day? 😄",
       options: ["More sleep", "More food", "Your happiness", "New phone"],
-      answer: 2,
+      answer: 3,
     },
   ];
 

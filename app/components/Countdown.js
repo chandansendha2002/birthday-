@@ -176,6 +176,7 @@ export default function Countdown() {
           Aab Gana Suno tum.......❤️❤️
         </div>
       )}
+      <div className="text-5xl text-center mt-20">Sorry 😢</div>
     </section>
   );
 }

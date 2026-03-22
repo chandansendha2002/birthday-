@@ -94,13 +94,13 @@ export default function RomanticMessage() {
   };
 
   return (
-    <section className="relative h-screen w-full flex items-center justify-center text-center text-white overflow-hidden">
+    <section className="relative pt-20 pb-10 h-screen w-full flex items-center justify-center text-center text-white overflow-hidden mb-0">
       {/* Canvas Fireworks */}
       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
 
       {/* Content */}
       <div className="relative z-10 px-6 max-w-3xl">
-        <h1 className="text-6xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-pink-400 via-purple-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-xl">
+        {/* <h1 className="text-6xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-pink-400 via-purple-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-xl">
           🎂 Happy Birthday
         </h1>
 
@@ -119,6 +119,65 @@ export default function RomanticMessage() {
               deleteSpeed: 20,
             }}
           />
+        </div> */}
+        <h1 className="text-6xl md:text-7xl pb-5 font-extrabold mb-8 bg-gradient-to-r from-pink-400 via-purple-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-xl">
+          🎂 Happy Birthday My Love
+        </h1>
+
+        {/* ✨ Stylish Typewriter */}
+        <div className="text-2xl md:text-3xl leading-relaxed font-light text-white mb-10 relative">
+          {/* Glow effect */}
+          <div className="absolute inset-0 blur-xl opacity-30 bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400"></div>
+
+          <div className="relative z-10">
+            <Typewriter
+              options={{
+                strings: [
+                  "To the most beautiful soul in my life ❤️",
+                  "Every moment with you feels like a dream ✨",
+                  "You are not just special… you are my everything 💕",
+                  "And today… is all about celebrating YOU 🎂",
+                ],
+                autoStart: true,
+                loop: true,
+                delay: 50,
+                deleteSpeed: 25,
+              }}
+            />
+          </div>
+        </div>
+
+        {/* 💌 Romantic Letter */}
+        <div className="max-w-3xl text-center text-lg md:text-xl text-white/90 leading-loose font-light space-y-4">
+          <p>My Love 💖,</p>
+
+          <p>
+            On this special day, I just want to remind you how incredibly
+            important you are to me. You are the reason behind my smiles, my
+            peace, and my happiness.
+          </p>
+
+          <p>
+            Every moment I spend with you feels like a beautiful dream that I
+            never want to wake up from. From our smallest conversations to our
+            biggest memories… everything with you is magical.
+          </p>
+
+          <p>
+            I may not always say it perfectly, but I truly mean it — you are my
+            today, my tomorrow, and everything I could ever wish for.
+          </p>
+
+          <p>
+            On your birthday, I just want to promise one thing… I’ll always be
+            there for you, loving you a little more every single day ❤️
+          </p>
+
+          <p className="text-pink-400 font-semibold">
+            Happy Birthday once again, my love 🎂✨
+          </p>
+
+          <p>— Yours forever 💕</p>
         </div>
       </div>
 

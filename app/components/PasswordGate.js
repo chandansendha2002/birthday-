@@ -9,7 +9,7 @@ export default function PasswordGate({ onSuccess }) {
   const [error, setError] = useState(false);
   const [show, setShow] = useState(false);
 
-  const correctPassword = "gelana";
+  const correctPassword = "31-10-2024";
 
   const handleUnlock = () => {
     if (input.toLowerCase() === correctPassword) {
@@ -112,7 +112,7 @@ export default function PasswordGate({ onSuccess }) {
           transition={{ duration: 3, repeat: Infinity }}
           className="text-sm mt-6 opacity-60"
         >
-          Hint: try your own 😉
+          Hint: when we meet (dd-mm-yyyy) 😉
         </motion.p>
       </motion.div>
     </div>

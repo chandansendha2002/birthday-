@@ -1,192 +1,10 @@
-// "use client";
-// import { useState, useEffect, useRef } from "react";
-// import Image from "next/image";
-// import confetti from "canvas-confetti";
-
-// export default function MemoryCarousel() {
-//   const images = [
-//     "/memories/mem1.jpg",
-//     "/memories/mem2.jpg",
-//     "/memories/mem3.jpg",
-//     "/memories/mem4.jpg",
-//     "/memories/mem5.jpg",
-//     "/memories/mem6.jpg",
-//     "/memories/mem7.jpg",
-//     "/memories/mem8.jpg",
-//     "/memories/mem9.jpg",
-//     "/memories/mem10.jpg",
-//     "/memories/mem11.jpg",
-//     "/memories/mem13.jpg",
-//     "/memories/mem14.jpg",
-//     "/memories/mem15.jpg",
-//     "/memories/mem16.jpg",
-//     "/memories/mem17.jpg",
-//     "/memories/mem18.jpg",
-//     "/memories/mem19.jpg",
-//     "/memories/mem20.jpg",
-//     "/memories/mem21.jpg",
-//     "/memories/mem22.jpg",
-//     "/memories/mem23.jpg",
-//   ];
-
-//   const [rotation, setRotation] = useState(0);
-//   const [isHover, setIsHover] = useState(false);
-//   const startX = useRef(0);
-
-//   const radius = 500;
-
-//   // Auto rotate
-//   useEffect(() => {
-//     if (isHover) return;
-
-//     const interval = setInterval(() => {
-//       setRotation((prev) => prev - 360 / images.length);
-//     }, 3500);
-
-//     return () => clearInterval(interval);
-//   }, [isHover]);
-
-//   const next = () => {
-//     confetti({ particleCount: 60, spread: 50 });
-//     setRotation((r) => r - 360 / images.length);
-//   };
-
-//   const prev = () => {
-//     confetti({ particleCount: 60, spread: 50 });
-//     setRotation((r) => r + 360 / images.length);
-//   };
-
-//   const handleDragStart = (e) => {
-//     startX.current = e.clientX || e.touches[0].clientX;
-//   };
-
-//   const handleDragEnd = (e) => {
-//     const endX = e.clientX || e.changedTouches[0].clientX;
-
-//     if (endX - startX.current > 50) prev();
-//     if (startX.current - endX > 50) next();
-//   };
-
-//   return (
-//     <section className="relative flex flex-col items-center text-center overflow-hidden">
-//       {/* Background Glow */}
-//       <div className="absolute inset-0 bg-gradient-to-b from-purple-900 via-black to-black opacity-80"></div>
-
-//       {/* Floating Sparkles */}
-//       <div className="absolute inset-0 pointer-events-none">
-//         {[...Array(40)].map((_, i) => (
-//           <span
-//             key={i}
-//             className="absolute bg-white rounded-full animate-pulse"
-//             style={{
-//               width: `${Math.random() * 4 + 2}px`,
-//               height: `${Math.random() * 4 + 2}px`,
-//               left: `${Math.random() * 100}%`,
-//               top: `${Math.random() * 100}%`,
-//               opacity: Math.random(),
-//             }}
-//           />
-//         ))}
-//       </div>
-
-//       {/* Heading */}
-//       <h2 className="relative z-10 text-5xl md:text-6xl font-extrabold mb-20 bg-gradient-to-r from-pink-400 via-purple-400 to-yellow-300 text-transparent bg-clip-text">
-//         Our Beautiful Journey 💖
-//       </h2>
-
-//       {/* 3D Carousel */}
-//       <div
-//         className="relative w-full h-[520px] flex items-center justify-center perspective-[2500px] z-10"
-//         onMouseEnter={() => setIsHover(true)}
-//         onMouseLeave={() => setIsHover(false)}
-//         onMouseDown={handleDragStart}
-//         onMouseUp={handleDragEnd}
-//         onTouchStart={handleDragStart}
-//         onTouchEnd={handleDragEnd}
-//       >
-//         <div
-//           className="relative w-[420px] h-[300px] transition-transform duration-[1800ms] ease-in-out"
-//           style={{
-//             transformStyle: "preserve-3d",
-//             transform: `rotateY(${rotation}deg)`,
-//           }}
-//         >
-//           {images.map((img, i) => {
-//             const angle = (360 / images.length) * i;
-
-//             return (
-//               <div
-//                 key={i}
-//                 className="absolute w-[420px] h-[280px] rounded-3xl overflow-hidden shadow-[0_20px_80px_rgba(255,0,150,0.4)]"
-//                 style={{
-//                   transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
-//                 }}
-//               >
-//                 {/* Glow Border */}
-//                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-pink-400 via-purple-400 to-yellow-300 blur-xl opacity-30"></div>
-
-//                 <Image
-//                   src={img}
-//                   fill
-//                   alt="memory"
-//                   className="object-contain rounded-3xl bg-black"
-//                 />
-//               </div>
-//             );
-//           })}
-//         </div>
-//       </div>
-
-//       {/* Controls */}
-//       <div className="relative z-10 flex gap-10 mt-12">
-//         <button
-//           onClick={prev}
-//           className="px-6 py-3 rounded-full bg-white/20 backdrop-blur-lg hover:bg-white/40 transition text-white text-lg"
-//         >
-//           ⬅ Prev
-//         </button>
-
-//         <button
-//           onClick={next}
-//           className="px-6 py-3 rounded-full bg-white/20 backdrop-blur-lg hover:bg-white/40 transition text-white text-lg"
-//         >
-//           Next ➡
-//         </button>
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import confetti from "canvas-confetti";
 
-export default function MemoryCarousel() {
-  const images = [
-    "/memories/mem1.jpg",
-    "/memories/mem2.jpg",
-    "/memories/mem3.jpg",
-    "/memories/mem4.jpg",
-    "/memories/mem5.jpg",
-    "/memories/mem6.jpg",
-    "/memories/mem7.jpg",
-    "/memories/mem8.jpg",
-    "/memories/mem9.jpg",
-    "/memories/mem10.jpg",
-    "/memories/mem11.jpg",
-    "/memories/mem13.jpg",
-    "/memories/mem14.jpg",
-    "/memories/mem15.jpg",
-    "/memories/mem16.jpg",
-    "/memories/mem17.jpg",
-    "/memories/mem18.jpg",
-    "/memories/mem19.jpg",
-    "/memories/mem20.jpg",
-    "/memories/mem21.jpg",
-    "/memories/mem22.jpg",
-    "/memories/mem23.jpg",
-  ];
+export default function MemoryCarousel({images, title, sub}) {
+
 
   const [rotation, setRotation] = useState(0);
   const [isHover, setIsHover] = useState(false);
@@ -237,7 +55,7 @@ export default function MemoryCarousel() {
   };
 
   return (
-    <section className="relative flex flex-col items-center text-center overflow-hidden">
+    <section className="relative flex flex-col items-center text-center overflow-hidden mb-0">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900 via-black to-black opacity-80"></div>
 
@@ -259,13 +77,13 @@ export default function MemoryCarousel() {
       </div>
 
       {/* Heading */}
-      <h2 className="relative z-10 text-5xl md:text-6xl font-extrabold mb-20 bg-gradient-to-r from-pink-400 via-purple-400 to-yellow-300 text-transparent bg-clip-text">
-        Our Beautiful Journey 💖
+      <h2 className="relative z-10 text-5xl md:text-6xl font-extrabold mb-10 bg-gradient-to-r from-pink-400 via-purple-400 to-yellow-300 text-transparent bg-clip-text mt-15 py-20">
+        {title} <br />{sub}
       </h2>
 
       {/* Carousel */}
       <div
-        className="relative w-full h-[520px] flex items-center justify-center perspective-[2500px] z-10"
+        className="relative w-full h-[500px] flex items-center justify-center perspective-[2500px] z-10"
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
         onMouseDown={handleDragStart}
@@ -274,7 +92,8 @@ export default function MemoryCarousel() {
         onTouchEnd={handleDragEnd}
       >
         <div
-          className="relative w-[420px] h-[300px] transition-transform duration-700 ease-out will-change-transform"
+          className="relative w-[420px] h-[470px] mx-auto transition-transform duration-700 ease-out will-change-transform"
+          // className="relative w-[520px] h-[380px] mx-auto transition-transform duration-700 ease-out will-change-transform"
           style={{
             transformStyle: "preserve-3d",
             transform: `rotateY(${rotation}deg) translateZ(0)`,
@@ -286,7 +105,8 @@ export default function MemoryCarousel() {
             return (
               <div
                 key={i}
-                className="absolute w-[420px] h-[280px] rounded-3xl overflow-hidden shadow-[0_10px_40px_rgba(255,0,150,0.35)]"
+                className="absolute w-[420px] h-[470px] rounded-3xl overflow-hidden shadow-[0_10px_40px_rgba(255,0,150,0.35)]"
+                // className="absolute w-[520px] h-[380px] rounded-3xl overflow-hidden shadow-[0_10px_40px_rgba(255,0,150,0.35)]"
                 style={{
                   transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
                   backfaceVisibility: "hidden",
@@ -296,7 +116,7 @@ export default function MemoryCarousel() {
                   src={img}
                   fill
                   alt="memory"
-                  className="object-cover rounded-3xl"
+                  className="object-fit rounded-3xl"
                   sizes="420px"
                   priority={i < 3}
                 />
@@ -307,7 +127,7 @@ export default function MemoryCarousel() {
       </div>
 
       {/* Controls */}
-      <div className="relative z-10 flex gap-10 mt-12">
+      <div className="relative z-10 flex gap-10 m-12">
         <button
           onClick={prev}
           className="px-6 py-3 rounded-full bg-white/20 backdrop-blur-lg hover:bg-white/40 transition text-white text-lg"
